@@ -1,0 +1,45 @@
+## Selection Sort Algorithm
+
+1. Initialization:
+   - Start with the entire array as the unsorted portion.
+
+2. Outer Loop (i):
+   - Iterate over each element in the array (from the first element to the second last element).
+   - Purpose: Helps in placing the smallest element at the beginning of the unsorted portion in each iteration.
+
+3. Assume the First Element of the Unsorted Portion is the Minimum:
+   - min := i assumes that the current index i is the minimum element of the unsorted portion.
+
+4. Inner Loop (j):
+   - Iterates through the unsorted portion of the array starting from index i.
+   - Purpose: Finds the minimum element in the unsorted portion.
+
+5. Find the Minimum Element in the Unsorted Portion:
+   - if arr[j] < arr[min] checks if the current element is smaller than the current assumed minimum. If it is, min = j updates the minimum index to the current element's index.
+
+6. Swap the Found Minimum Element with the Current Element:
+   - After the inner loop finds the smallest element in the unsorted portion, if min != i checks if the smallest element is already in the correct position. If not, it swaps the elements (arr[i], arr[min] = arr[min], arr[i]).
+
+7. Repeat Until the Array is Sorted:
+   - The outer loop repeats the process for each element of the array until the entire array is sorted.
+
+Example Walkthrough:
+Given the array [13, 46, 24, 52, 20, 9]:
+
+1. First Pass (i = 0):
+   - Unsorted portion: [13, 46, 24, 52, 20, 9]
+   - Find the minimum element: 9
+   - Swap 9 with the first element 13
+   - Array becomes: [9, 46, 24, 52, 20, 13]
+
+2. Second Pass (i = 1):
+   - Unsorted portion: [46, 24, 52, 20, 13]
+   - Find the minimum element: 13
+   - Swap 13 with the second element 46
+   - Array becomes: [9, 13, 24, 52, 20, 46]
+
+3. Continue the Process:
+   - Repeat the process for each subsequent element until the entire array is sorted.
+
+=================================================================================================================
+
