@@ -1,5 +1,22 @@
 package sorting1
 
+func SelectionSort(arr []int) []int { // Define a function that takes a slice of integers and returns a sorted slice
+
+	n := len(arr)                  // Get the length of the array
+	for i := 0; i < (n - 1); i++ { // Outer loop iterates from the start to the second last element
+		min := i                 // Assume the current position is the minimum
+		for j := i; j < n; j++ { // Inner loop to find the minimum element in the remaining unsorted portion
+			if arr[j] < arr[min] { // If the current element is less than the assumed minimum
+				min = j // Update the minimum position
+			}
+		}
+		if min != i { // If the minimum element is not already in the current position
+			arr[i], arr[min] = arr[min], arr[i] // Swap the current element with the found minimum element
+		}
+	}
+	return arr // Return the sorted array
+}
+
 //Selection sort practice problems
 //--------------------------------------------------------------------------------------------------'
 // Problem 1: Sorting Structs

@@ -2,6 +2,18 @@ package sorting1
 
 import "fmt"
 
+func BubbleSort(arr []int) []int {
+	n := len(arr)                // Get the length of the array
+	for i := n - 1; i > 0; i-- { // Outer loop: Iterate from the last element index to the second element index
+		for j := 0; j < i; j++ { // Inner loop: Iterate from the first element index to the current `i`
+			if arr[j] > arr[j+1] { // Compare current element with the next element
+				arr[j], arr[j+1] = arr[j+1], arr[j] // Swap elements if they are out of order
+			}
+		}
+	}
+	return arr // Return the sorted array
+}
+
 // Bubble sort Practice problems
 //-------------------------------------------------------------------------------------------------------------------------------------
 // 1. Basic Bubble Sort
