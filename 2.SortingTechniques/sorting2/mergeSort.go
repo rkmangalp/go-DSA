@@ -1,5 +1,7 @@
 package sorting2
 
+import "sort"
+
 // MergeSort recursively sorts an array using the merge sort algorithm.
 func MergeSort(arr []int, low int, high int) {
 	if low < high {
@@ -160,3 +162,23 @@ func MergePerson(person []Person, low int, mid int, high int) {
 // fmt.Println("Given array is:", persons)
 // sorting2.MergeSortPerson(persons, 0, len(persons)-1)
 // fmt.Println("Sorted array is:", persons)
+
+//----------------------------------------------------------------------------------------------------
+
+//4. Merge K Sorted Arrays
+
+// Problem: Given K sorted arrays, merge them into a single sorted array.
+// Example Input: [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+// Expected Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+func MergeKsortedArray(arr [][]int) []int {
+	var mergedArr []int
+
+	for _, array := range arr {
+		mergedArr = append(mergedArr, array...)
+	}
+
+	sort.Ints(mergedArr)
+	return mergedArr
+
+}
