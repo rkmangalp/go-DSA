@@ -539,9 +539,163 @@ func MaxConsecutiveOnes(arr []int) int {
 
 // Brute force- using linear search and keeping a count of each element
 
-//Optimal approach
+//Brute approach
 
-func FindNumappearOnes(arr []int) int {
-	return 1
+func FindNumAppearOnesBrute(arr []int) int {
+	n := len(arr)
+
+	for i := 0; i < n; i++ {
+		count := 0
+		for j := 0; j < n; j++ {
+			if arr[i] == arr[j] {
+				count++
+			}
+
+		}
+		if count == 1 {
+			return arr[i]
+		}
+	}
+
+	return -1
 
 }
+
+// Better approach (using hash maps)
+
+func FindNumAppearOnesBetter(arr []int) int {
+
+	counts := make(map[int]int)
+
+	for _, num := range arr {
+		counts[num]++
+	}
+
+	for num, count := range counts {
+		if count == 1 {
+			return num
+		}
+	}
+	return -1
+}
+
+func FindNumAppearOnesOptimal(arr []int) int {
+
+	xor := 0
+	for i := 0; i < len(arr); i++ {
+		xor = xor ^ arr[i]
+	}
+	return xor
+}
+
+//Test case
+// arr := []int{1, 1, 2, 3, 3, 4, 4}
+// result := easy.FindNumAppearOnesOptimal(arr)
+
+// fmt.Printf("The number %d appears ones in the array %v\n", result, arr)
+
+//---------------------------------------------------------------------------------------------------------------------
+
+//13. Longest Subarray with given Sum K(Positives)
+//Problem Statement: Given an array and a sum k, we need to print the length of the longest subarray that sums to k.
+
+// Brute force
+func LongestSubArrayBrute(arr []int, k int) (int, []int) {
+	n := len(arr)
+	maxLen := 0
+	start := -1
+	end := -1
+	for i := 0; i < n; i++ {
+		sum := 0
+		for j := i; j < n; j++ {
+			sum += arr[j]
+			if sum == k {
+				length := j - i + 1
+				if length > maxLen {
+					maxLen = length
+					start = i
+					end = j
+				}
+			}
+		}
+	}
+	return maxLen, arr[start : end+1]
+}
+
+// Better Approach
+func LongestSubArrayBetter(arr []int, k int) int {
+	n := len(arr) // size of the array
+
+	// preSumMap will store the prefix sums and their indice
+	preSum := make(map[int]int)
+	sum := 0    // sum of elements seen so far
+	maxLen := 0 // maximum length of subarray with sum equal to k
+
+	// iterate through the array
+	for i := 0; i < n; i++ {
+		sum += arr[i] // add the current element to the running sum
+
+		if sum == k {
+			maxLen = max(maxLen, i+1)
+		}
+		// calculate the remaining sum that needs to be subtracted to get k
+		rem := sum - k
+
+		// if rem exists in the map, it means there is a subarray with sum equal to k
+		if index, found := preSum[rem]; found {
+			length := i - index
+			maxLen = max(length, maxLen)
+		}
+		// if sum is not already in the map, add it with its index
+		if _, found := preSum[sum]; !found {
+			preSum[sum] = i
+		}
+
+	}
+	return maxLen
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func LongestSubArrayOptimal(arr []int, k int) (int, []int) {
+	n := len(arr)
+	left, right := 0, 0
+	sum := arr[0]
+	maxLen := 0
+	start := 0
+	end := 0
+
+	for right < n {
+		for left <= right && sum > k {
+			sum -= arr[left]
+			left++
+		}
+		if sum == k {
+			if right-left+1 > maxLen {
+				maxLen = right - left + 1
+				start, end = left, right
+			}
+
+		}
+
+		right++
+		if right < n {
+			sum += arr[right]
+		}
+
+	}
+
+	return maxLen, arr[start : end+1]
+}
+
+//Test case
+// a := []int{2, 3, 5, 1, 9}
+// k := 10
+// len, arr := easy.LongestSubArrayOptimal(a, k)
+// fmt.Printf("The length of the longest subarray is: %d and the subarray is %v", len, arr)
+//---------------------------------------------------------------------------------------------------------------------
