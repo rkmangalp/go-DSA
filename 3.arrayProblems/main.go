@@ -2,13 +2,24 @@ package main
 
 import (
 	"fmt"
-	"go-DSA/3.arrayProblems/easy"
+	"go-DSA/3.arrayProblems/medium"
 )
 
+// you can test any functions present in arrayProblems folder by calling it in main,go
+
 func main() {
-	nums := []int{1, 2, 3, 4, 5, 6, 7}
-	fmt.Printf("Original array is: %v\n", nums)
-	roatatedArray := easy.RotatebyDnum1(nums, len(nums), 3)
-	fmt.Printf("updated array is: %v", roatatedArray)
+	//Test case
+	tests := [][]int{
+		{3, 3, 4, 2, 4, 4, 2, 4, 4}, // Test case 1
+		{1, 1, 1, 1, 1, 1, 1},       // Test case 2
+		{2, 2, 1, 1, 2, 2, 2},       // Test case 3
+		{1, 1, 1, 2, 2, 2, 2},       // Test case 4
+		{5, 5, 5, 1, 2, 5, 3, 5},    // Test case 5
+	}
+
+	for i, arr := range tests {
+		result := medium.MajorityElementInArrOptimal(arr)
+		fmt.Printf("Test case %d: Input: %v, Majority Element: %d\n", i+1, arr, result)
+	}
 
 }

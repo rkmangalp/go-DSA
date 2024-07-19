@@ -227,3 +227,91 @@ func SortArrZeroOneAndTwosOptimal(arr []int) {
 // }
 
 //----------------------------------------------------------------------------------------------------
+
+// 3. Find the Majority Element that occurs more than N/2 times
+
+// Problem Statement: Given an array of N integers, write a program to return an
+// element that occurs more than N/2 times in the given array.
+// You may consider that such an element always exists in the array.
+
+// Brute force approach
+
+func MajorityElementInArrBrute(arr []int) int {
+	n := len(arr)
+
+	for i := 0; i < n; i++ {
+		count := 0
+		for j := 0; j < n; j++ {
+			if arr[j] == arr[i] {
+				count++
+			}
+			if count > n/2 {
+				return arr[i]
+			}
+		}
+	}
+	return -1
+}
+
+// Better approach
+func MajorityElementInArrBetter(arr []int) int {
+	n := len(arr)
+	temp := make(map[int]int)
+
+	for _, num := range arr {
+		temp[num]++
+	}
+	for key, val := range temp {
+		if val > n/2 {
+			return key
+		}
+	}
+	return -1
+}
+
+// optimal approach - Using Moore's voting algorithm
+
+func MajorityElementInArrOptimal(arr []int) int {
+	n := len(arr)
+	count := 0
+	var ele int
+	for i := 0; i < n; i++ {
+		if count == 0 {
+			count = 1
+			ele = arr[i]
+
+		} else if ele == arr[i] {
+			count++
+		} else {
+			count--
+		}
+
+	}
+	//  checking if stored element is grater than n/2
+	count2 := 0
+	for i := 0; i < n; i++ {
+		if arr[i] == ele {
+			count2++
+		}
+		if count2 > n/2 {
+			return ele
+		}
+	}
+	return -1
+}
+
+//Test case
+// tests := [][]int{
+// 	{3, 3, 4, 2, 4, 4, 2, 4, 4}, // Test case 1
+// 	{1, 1, 1, 1, 1, 1, 1},       // Test case 2
+// 	{2, 2, 1, 1, 2, 2, 2},       // Test case 3
+// 	{1, 1, 1, 2, 2, 2, 2},       // Test case 4
+// 	{5, 5, 5, 1, 2, 5, 3, 5},    // Test case 5
+// }
+
+// for i, arr := range tests {
+// 	result := medium.MajorityElementInArrOptimal(arr)
+// 	fmt.Printf("Test case %d: Input: %v, Majority Element: %d\n", i+1, arr, result)
+// }
+
+//----------------------------------------------------------------------------------------------------
