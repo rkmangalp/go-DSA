@@ -314,4 +314,129 @@ func MajorityElementInArrOptimal(arr []int) int {
 // 	fmt.Printf("Test case %d: Input: %v, Majority Element: %d\n", i+1, arr, result)
 // }
 
-//----------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
+
+// 4. Kadane's Algorithm : Maximum Subarray Sum in an Array
+// Problem Statement: Given an integer array arr, find the contiguous subarray (containing at least one number)
+// which has the largest sum and returns its sum and prints the subarray.
+
+//Brute force - using 3 pointers ; TC - O(N^3)
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
+
+func MaxSubArrSumBrute(arr []int) int {
+	n := len(arr)
+	sumMax := 0
+
+	for i := 0; i < n; i++ {
+		for j := i; j < n; j++ {
+			sum := 0
+			for k := i; k <= j; k++ {
+				sum += arr[k]
+			}
+			sumMax = max(sumMax, sum)
+		}
+
+	}
+	return sumMax
+}
+
+//Better approach - TC = O(N^2)
+
+func MaxSubArrSumBetter(arr []int) int {
+	n := len(arr)
+	sumMax := 0
+
+	for i := 0; i < n; i++ {
+		sum := 0
+		for j := i; j < n; j++ {
+			sum += arr[j]
+			sumMax = max(sumMax, sum)
+		}
+
+	}
+	return sumMax
+}
+
+// Optimal - Kadane's Algorithm
+
+func MaxSubArrSumOptimal(arr []int) int {
+	sum := 0
+	sumMax := arr[0]
+	for _, num := range arr {
+		sum += num
+		sumMax = max(sumMax, sum)
+		if sum < 0 {
+			sum = 0
+		}
+
+	}
+	return sumMax
+}
+
+//Test case
+// arr := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+// result := medium.MaxSubArrSumOptimal(arr)
+// fmt.Printf("The max sub array sum is %d", result)
+
+//---------------------------------------------------------------------------------------------------------------
+
+// 5. Follow up question to the above problem.
+//To find the longest sum subarray.
+
+func LongestSumSubArray(arr []int) []int {
+	n := len(arr)
+	sumMax := arr[0]
+	sum := 0
+	start := 0
+	ansStart, ansEnd := -1, -1
+
+	for i := 0; i < n; i++ {
+		if sum == 0 {
+			start = i
+		}
+		sum += arr[i]
+		if sum > sumMax {
+			sumMax = sum
+			ansStart = start
+			ansEnd = i
+		}
+
+		if sum < 0 {
+			sum = 0
+		}
+	}
+	return arr[ansStart : ansEnd+1]
+}
+
+// you can use the same test case in the above problem
+
+//---------------------------------------------------------------------------------------------------------------
+//6. Stock Buy And Sell
+
+// Problem Statement: You are given an array of prices where prices[i] is the price of a
+// given stock on an ith day.
+
+// You want to maximize your profit by choosing a single day to buy one stock and choosing
+// a different day in the future to sell that stock. Return the maximum profit you can
+// achieve from this transaction. If you cannot achieve any profit, return 0.
+
+func StockBuySellBrute(arr []int) int {
+	n := len(arr)
+	maxPro := 0
+
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if arr[i] < arr[j] {
+				maxPro = max(arr[j]-arr[i], maxPro)
+			}
+		}
+	}
+	return maxPro
+}
