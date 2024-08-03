@@ -20,35 +20,38 @@ import (
 
 // combined 1st and 2nd variant
 func TwoSumBrute(arr []int, target int) (string, [2]int) {
-
 	n := len(arr)
+	// Iterate over each pair of elements in the array
 	for i := 0; i < n-1; i++ {
 		for j := i + 1; j < n; j++ {
+			// Check if the sum of the current pair equals the target
 			if arr[i]+arr[j] == target {
-				return "YES", [2]int{i, j}
+				return "YES", [2]int{i, j} // Return "YES" and the indices if found
 			}
-
 		}
 	}
-	return "NO", [2]int{-1, -1}
+	return "NO", [2]int{-1, -1} // Return "NO" and [-1, -1] if no pair is found
 }
 
 //Optimal (using hash maps)
 
 func TwoSumOptimal(arr []int, target int) (string, [2]int) {
-	numMap := make(map[int]int)
+	numMap := make(map[int]int) // Create a hash map to store numbers and their indices
 
+	// Iterate over the array
 	for i, num := range arr {
-		compliment := target - num
-		if index, found := numMap[compliment]; found {
-			return "YES", [2]int{index, i}
+		compliment := target - num                     // Calculate the complement of the current number
+		if index, found := numMap[compliment]; found { // Check if the complement exists in the map
+			return "YES", [2]int{index, i} // Return "YES" and the indices if found
 		}
-		numMap[num] = i
+		numMap[num] = i // Add the current number and its index to the map
 	}
 
-	return "NO", [2]int{-1, -1}
-
+	return "NO", [2]int{-1, -1} // Return "NO" and [-1, -1] if no pair is found
 }
+
+// Optimal approach using two pointers (without hash map)
+// This method works only if the array can be modified or the order of elements doesn't matter
 
 //optimal2 (without using hashmap) using two pointer
 // this optimal only for 1st variant, not for 2nd as, it used lot of space and time complexity varies
@@ -74,18 +77,19 @@ func TwoSumOptimal2(arr []int, target int) (string, [2]int) {
 
 	left := 0
 	right := n - 1
+	// Use two pointers to find the pair
 	for left < right {
 		sum := pairs[left].value + pairs[right].value
 		if sum == target {
-			return "YES", [2]int{pairs[left].index, pairs[right].index}
+			return "YES", [2]int{pairs[left].index, pairs[right].index} // Return "YES" and the indices if found
 		} else if sum < target {
-			left++
+			left++ // Move the left pointer to the right if the sum is less than the target
 		} else {
-			right--
+			right-- // Move the right pointer to the left if the sum is greater than the target
 		}
 	}
 
-	return "NO", [2]int{-1, -1}
+	return "NO", [2]int{-1, -1} // Return "NO" and [-1, -1] if no pair is found
 }
 
 //Test case
@@ -594,3 +598,16 @@ func RearrangeArraybySign(arr []int) []int {
 // }
 
 //---------------------------------------------------------------------------------------------------------------
+
+// 8. next_permutation : find next lexicographically greater permutation
+
+// Problem Statement: Given an array Arr[] of integers, rearrange the numbers of the
+//  given array into the lexicographically next greater permutation of numbers.
+// If such an arrangement is not possible,
+// it must rearrange to the lowest possible order (i.e., sorted in ascending order).
+
+//Brute force approach
+
+func NextPermutationBrute() {
+
+}

@@ -6,6 +6,9 @@ import (
 	"sort"
 )
 
+// The Greatest Common Divisor (GCD) of two or more integers is the largest positive integer that divides each of the
+// integers without leaving a remainder. For example, the GCD of 8 and 12 is 4.
+
 // Euclidean algorithm to find the GCD
 func EuclideanGCD(a int, b int) int {
 
