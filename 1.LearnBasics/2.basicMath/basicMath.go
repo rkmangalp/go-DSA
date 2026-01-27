@@ -90,21 +90,24 @@ func Divisors(n int) {
 	fmt.Printf("The divisors of %d are %v", n, divisors)
 }
 
-// If the summation of cubes of digits in the number is equal to number then its called armstrong number
+// a number that is equal to the
+// sum of its own digits each raised to the power of the number of digits
+// eg: 35, 125
 func ArmstrongNum(n int) {
-	// 35
 	sum := 0
 	number := n
+	digits := int(math.Log10(float64(n))) + 1 // Get the number of digits
+
 	for n > 0 {
 		num := n % 10
-		sum = sum + int(math.Pow(float64(num), 3))
-		n = n / 10
+		sum += int(math.Pow(float64(num), float64(digits))) // Raise to the power of digits
+		n /= 10
 	}
-	if number == sum {
-		fmt.Printf(" The sum of cube of digits of number %d is %d and therefor it is an Armstrong number", number, sum)
 
+	if number == sum {
+		fmt.Printf("The sum of digits raised to the power of %d of number %d is %d. Therefore, it is an Armstrong number.\n", digits, number, sum)
 	} else {
-		fmt.Printf(" The sum of cube of digits of number %d is %d and therefor it is not an Armstrong number", number, sum)
+		fmt.Printf("The sum of digits raised to the power of %d of number %d is %d. Therefore, it is not an Armstrong number.\n", digits, number, sum)
 	}
 }
 

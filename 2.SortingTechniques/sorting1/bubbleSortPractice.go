@@ -2,6 +2,16 @@ package sorting1
 
 import "fmt"
 
+// Definition:
+// 2. Bubble Sort
+// Definition: Bubble Sort repeatedly swaps adjacent elements if they are in the wrong order.
+// The largest elements "bubble up" to their correct positions in each pass.
+// Time Complexity:
+// 𝑂(𝑁2) (worst and average case).
+
+// Space Complexity:
+// 𝑂(1) (in-place sorting).
+
 func BubbleSort(arr []int) []int {
 	n := len(arr)                // Get the length of the array
 	for i := n - 1; i > 0; i-- { // Outer loop: Iterate from the last element index to the second element index

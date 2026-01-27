@@ -159,3 +159,14 @@ func SelectionSortPairs(arr []Pair) []Pair {
 // fmt.Println(output)
 // Expected output: [{1, 2}, {2, 5}, {3, 1}, {3, 4}]
 //--------------------------------------------------------------------------------------------------
+
+// Definition:
+// 1. Selection Sort
+// Definition: Selection Sort is a sorting algorithm that repeatedly selects the smallest
+// element from the unsorted part of the array and swaps it with the first unsorted element.
+
+// Time Complexity:
+// 𝑂(𝑁2) (worst and average case).
+
+// Space Complexity:
+// 𝑂(1) (in-place sorting).

@@ -1,26 +1,9 @@
 package main
 
 import (
-	"fmt"
+	patterns "go-DSA/1.LearnBasics/1.patterns"
 )
 
 func main() {
-	temp(5)
-	// fmt.Println(s)
-}
-
-func temp(n int) {
-	start := 1
-	for i := 0; i < n; i++ {
-		if i%2 == 0 {
-			start = 1
-		} else {
-			start = 0
-		}
-		for j := 1; j <= i; j++ {
-			fmt.Print(start)
-			start = 1 - start
-		}
-		fmt.Println()
-	}
+	patterns.Pattern2(10)
 }

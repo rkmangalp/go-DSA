@@ -2,6 +2,11 @@ package sorting1
 
 import "fmt"
 
+// Definition:
+// 3. Insertion Sort
+// Definition: Insertion Sort builds the sorted array one element at a time by
+// inserting each element into its correct position among the previously sorted elements.
+
 func InsertionSort(arr []int) []int {
 	n := len(arr)
 	for i := 1; i < n; i++ { // Outer loop: Starts from the second element and goes to the last element

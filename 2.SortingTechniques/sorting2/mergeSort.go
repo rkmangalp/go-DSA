@@ -6,6 +6,7 @@ import "sort"
 func MergeSort(arr []int, low int, high int) {
 	if low < high {
 		mid := low + (high-low)/2 // Correct calculation of the midpoint
+		// fmt.Printf("Msort called with low: %d, mid: %d, high: %d\n", low, mid, high)
 
 		MergeSort(arr, low, mid)    // Recursively sort the first half
 		MergeSort(arr, mid+1, high) // Recursively sort the second half
@@ -15,6 +16,8 @@ func MergeSort(arr []int, low int, high int) {
 
 // Merge combines two sorted subarrays into one sorted array.
 func Merge(arr []int, low int, mid int, high int) {
+	// fmt.Printf("Merge called with low: %d, mid: %d, high: %d\n", low, mid, high)
+
 	temp := make([]int, 0, high-low+1) // Temporary slice to hold the merged elements
 	left := low                        // Starting index for the left subarray
 	right := mid + 1                   // Starting index for the right subarray
@@ -46,6 +49,8 @@ func Merge(arr []int, low int, mid int, high int) {
 	for i := low; i <= high; i++ {
 		arr[i] = temp[i-low]
 	}
+	// fmt.Printf("Merged array: %v\n", arr[low:high+1])
+
 }
 
 // TEST CASE
