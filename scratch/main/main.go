@@ -1,20 +1,19 @@
 package main
 
-// func trackTime(start time.Time) {
-// 	fmt.Println("Execution Time:", time.Since(start))
-// }
+import "fmt"
 
-// func main() {
-// 	nums := []int{10, 5, 10, 15, 10, 5}
-// 	// result := buildArray(nums)
-// 	fmt.Println("Result:", result)
-// }
+func main() {
+	students := map[string]int{"ravi": 90, "kiran": 100}
+	students["mang"] = 95
 
-// func buildArray(nums []int) []int {
-// 	// your code here
-// 	var ans map[int]int
-// 	for i := 0; i < len(nums); i++{
+	fmt.Println(students)
+	delete(students, "kiran")
 
-// 	}
+	fmt.Println("after delete:", students)
 
-// }
+	//iterate
+
+	for val := range students {
+		fmt.Println(val)
+	}
+}
