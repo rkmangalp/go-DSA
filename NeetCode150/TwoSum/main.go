@@ -26,8 +26,19 @@ import (
 func main() {
 
 	arr1 := []int{2, 4, 7, 11, 15, 6}
-	fmt.Println(twoSumBetter(arr1, 9))
+	fmt.Println(twoSum(arr1, 9))
 
+}
+
+func twoSum(arr []int, tar int) []int {
+	arrMap := make(map[int]int)
+	for i, num := range arr {
+		if idx, ok := arrMap[tar-arr[i]]; ok {
+			return []int{i, idx}
+		}
+		arrMap[num] = i
+	}
+	return nil
 }
 
 // 💡 Intuition:
@@ -76,5 +87,19 @@ func twoSumBetter(arr []int, tar int) []int {
 			end--
 		}
 	}
+	return nil
+}
+
+// Input: nums = [2,7,11,15], target = 9
+func twoSumOptimal(arr []int, tar int) []int {
+
+	arrMap := make(map[int]int)
+	for i, num := range arr {
+		if idx, ok := arrMap[tar-arr[i]]; ok {
+			return []int{idx, i}
+		}
+		arrMap[num] = i
+	}
+
 	return nil
 }
